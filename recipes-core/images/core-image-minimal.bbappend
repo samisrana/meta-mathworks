@@ -12,7 +12,7 @@ IMAGE_INSTALL:append = " libsysfs sysfsutils libconfig util-linux sed"
 
 
 inherit extrausers
-# Set root password as "root" (argument -p for usermod is obtained using 'mkpasswd -m sha-512 root')
+# Set root password as "cyclonevsoc" (argument -p for usermod is obtained using 'mkpasswd -m sha-512 root')
 EXTRA_USERS_PARAMS = " \
 usermod -p '\$6\$WR/8UtKTrBI\$ws/orbjj4P6jA8sYCBnWhKMwuORdQJR8LOQApnE96UqhtS/vy4olMAMKn/xneYF0gtiBsCekyxX8Wqy0cr5o40' root\
 "
