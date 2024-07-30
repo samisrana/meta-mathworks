@@ -17,10 +17,12 @@ if [ "${_SYS_PERSISTENT_FILESYSTEM}" == "false" ]; then
                 if [ ! -d $KEYFOLDER ]; then
                         mkdir -p $KEYFOLDER
                 fi
-                if [ -f $d/*host_*key* ]; then
+                for f in $d/*host_*key*; do
+                    if [ -f "$f" ]; then
                         echo "### Backup keys from $d to the SD card: "
-                        cp $d/*host_*key* $KEYFOLDER
-                fi
+                        cp "$f" $KEYFOLDER
+                    fi
+                done
         done
 	sync
         echo "OK"

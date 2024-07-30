@@ -3,6 +3,7 @@ DESCRIPTION = "Generate device-tree blobs for use with MathWorks example referen
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+DEPENDS:append = " dtc-native"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 # Depend on the virtual/kernel for kernel source and cmake-native for CMake
@@ -11,8 +12,7 @@ DEPENDS = "virtual/kernel cmake-native dtc-native"
 # Specify the source files and other details as needed
 SRC_URI = " file://CMakeLists.txt \
 	file://common \
-	file://zynqmp \
-	file://zynq"
+	file://socfpga" 
 
 S = "${WORKDIR}"
 

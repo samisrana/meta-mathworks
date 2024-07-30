@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Apply device tree overlay from SD card
+#
+
+source /etc/bootvars.conf
+
+source /etc/init.d/start_only.sh
+
+DTBO_FILE=mw_overlay.dtbo
+DTBO_PATH=${_SD_ROOT}/${DTBO_FILE}
+
+if [ -f ${DTBO_PATH} ]; then
+	echo "Applying device tree overlay from $DTBO_PATH..."
+	mkdir /sys/kernel/config/device-tree/overlays/mwipcore
+	cat $DTBO_PATH > /sys/kernel/config/device-tree/overlays/mwipcore/dtbo
+fi
+
+exit 0
