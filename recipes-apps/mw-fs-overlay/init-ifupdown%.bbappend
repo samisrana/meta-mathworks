@@ -1,4 +1,4 @@
-FILESEXTRAPATHS:prepend := "${THISDIR}/files/common/fs-overlay:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files/common/fs-overlay/etc/network:"
 
 do_install:append() {
     install -d ${D}${sysconfdir}/network
