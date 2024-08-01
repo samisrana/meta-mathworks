@@ -3,7 +3,7 @@ DESCRIPTION = "Generate device-tree blobs for use with MathWorks example referen
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
-DEPENDS:append = " dtc-native"
+DEPENDS:append += " dtc-native"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 # Depend on the virtual/kernel for kernel source and cmake-native for CMake
@@ -29,11 +29,8 @@ do_deploy() {
 	install -Dm 0644 ${B}/*.dtb ${DEPLOYDIR}/boot/mwdtbs/
 }
 
-do_install() {
-	:
-}
 addtask deploy after do_compile before do_build
 
 FILES:${PN} += "/boot/mwdtbs/*.dtb"
-INSANE_SKIP:${PN} += "installed-vs-skipped"
-
+FILES:${PN} += "/boot/dtbs/*.dtb"
+INSANE_SKIP:${PN} += "installed-vs-shipped"

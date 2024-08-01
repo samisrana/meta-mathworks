@@ -5,9 +5,9 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 project(MWDeviceTreeGen VERSION 1.0)
 
 find_program(DTC_EXECUTABLE NAMES dtc)
-#if (NOT DTC_EXECUTABLE)
-#  message(FATAL_ERROR "dtc (Device tree compiler) not found")
-#endif()
+if (NOT DTC_EXECUTABLE)
+  message(FATAL_ERROR "dtc (Device tree compiler) not found")
+endif()
 
 # Get the path to the kernel source and the target architecture from the environment
 set(MACHINE_OVERRIDES "${MACHINE_OVERRIDES}")
@@ -19,7 +19,8 @@ set(SUPPORTED_BOARDS "")
 set(SUPPORTED_ARCH "")
 
 list(APPEND SUPPORTED_ARCH
-  socfpga
+  zynq
+  zynqmp
 )
 
 foreach(arch IN LISTS SUPPORTED_ARCH)
@@ -32,8 +33,19 @@ endforeach()
 
 
 list(APPEND SUPPORTED_BOARDS
-  alteracycv
-  sockit
+  zcu102
+  zcu106
+  zcu102_revB
+  zcu208
+  zcu216
+  zcu111
+  zybo
+  zyboz7
+  picozed
+  adrv9361
+  zc706
+  zc702
+  zed
 )
 
 foreach (b IN LISTS SUPPORTED_BOARDS)
@@ -44,7 +56,7 @@ foreach (b IN LISTS SUPPORTED_BOARDS)
   endif()
 endforeach()
 
-set(DTFOLDER "${CMAKE_CURRENT_SOURCE_DIR}/${ARCH}/boards/${BOARD}/dts") 
+set(DTFOLDER "${CMAKE_CURRENT_SOURCE_DIR}/socfpga/boards/alteracycv/dts") 
 if (NOT EXISTS "${DTFOLDER}")
  message(FATAL_ERROR "!!!No such folder - ${DTFOLDER}..")
 endif()
@@ -67,6 +79,8 @@ list(APPEND INCLUDE_DIRS
   -I ${CMAKE_CURRENT_SOURCE_DIR} 
   -I ${CMAKE_CURRENT_SOURCE_DIR}/common/dts
   -I ${CMAKE_CURRENT_SOURCE_DIR}/socfpga/dts
+  -I ${CMAKE_CURRENT_SOURCE_DIR}/zynqmp/dts 
+  -I ${CMAKE_CURRENT_SOURCE_DIR}/zynq/dts
 )
 
 file(GLOB DTS_FILES "${DTFOLDER}/*.dts")
