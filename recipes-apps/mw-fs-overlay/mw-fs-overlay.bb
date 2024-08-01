@@ -38,6 +38,16 @@ do_install() {
 	cp -r ${WORKDIR}/common/fs-overlay/etc/bootvars.conf ${D}${sysconfdir}/
 	cp -r ${WORKDIR}/common/fs-overlay/etc/bootvars.d/* ${D}${sysconfdir}/bootvars.d/
 
+	#install -d ${D}${sysconfdir}/network
+	#install -m 0644 ${WORKDIR}/common/fs-overlay/etc/network/interfaces ${D}${sysconfdir}/network/interfaces
+
+	install -d ${D}/${sysconfdir}/profile.d/
+	cp -r ${WORKDIR}/socfpga/fs-overlay/etc/profile.d/* ${D}${sysconfdir}/profile.d/
+
+	install -d ${D}/${sysconfdir}/overlays/
+	cp -r ${WORKDIR}/socfpga/fs-overlay/etc/overlays/* ${D}${sysconfdir}/overlays/
+	cp ${WORKDIR}/socfpga/fs-overlay/etc/fw_env.config ${D}${sysconfdir}/
+
 	install -d ${D}${sbindir}/
 	install -d ${D}${sysconfdir}/init.d
 
@@ -86,6 +96,7 @@ do_install() {
 #	fi
 
 	cp -r ${WORKDIR}/common/fs-overlay/usr/sbin/* ${D}/${sbindir}/
+	cp -r ${WORKDIR}/socfpga/fs-overlay/usr/sbin/* ${D}/${sbindir}/
 	chmod -R 0755 ${D}${sbindir}/
 
 	install -d ${D}/${sysconfdir}/udev/rules.d/
